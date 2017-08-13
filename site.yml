@@ -3,3 +3,7 @@
   hosts: all # デプロイ対象ホストの指定
   become: true
   tasks: # 実タスク
+- name: libselinux-pythonをインストール
+  yum:
+    name: libselinux-python
+    state: present
