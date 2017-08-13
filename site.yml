@@ -3,20 +3,20 @@
   hosts: all # デプロイ対象ホストの指定
   become: true
   tasks: # 実タスク
-- name: libselinux-pythonをインストール
-  yum:
-    name: libselinux-python
-    state: present
-- name: EPELリポジトリをインストール
-  yum:
-    name: epel-release
-    state: present
-- name: Nginxのインストール
-  yum:
-    name: nginx
-    state: present
-- name: Nginxサービスの起動と自動起動設定
-  service:
-    name: nginx
-    state: started
-    enabled: true
+    - name: libselinux-pythonをインストール
+      yum:
+        name: libselinux-python
+        state: present
+    - name: EPELリポジトリをインストール
+      yum:
+        name: epel-release
+        state: present
+    - name: Nginxのインストール
+      yum:
+        name: nginx
+        state: present
+    - name: Nginxサービスの起動と自動起動設定
+      service:
+        name: nginx
+        state: started
+        enabled: true
