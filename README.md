@@ -103,3 +103,33 @@
             args:
               creates: /tmp/new-id_rsa # ファイルが存在しない場合のみ処理が実行される
     ```
+
+11. インベントリについて
+
+    * グループ間で変数定義が重複しないようにする
+    * ホスト名が同じ場合は同一ホストとして扱われる
+
+    ```
+    [app]
+    app1 ansible_host=some.app.host
+    app2 ansible_host=another.app.host
+    [db]
+    db1 ansible_host=db.1.host
+    db2 ansible_host=db.2.host
+    [japaneast]
+    app1
+    db1
+    [japanwest]
+    app2
+    db2
+    [app:vars]
+    admin_username=app_user
+    admin_uid=1001
+    ```
+
+12. インベントリの変数設定ファイル切り出し
+
+    * ホスト変数はhost_vars/ホスト名.yml
+    * グループ変数はgroup_vars/グループ名.yml
+    * グループ名にはallも使える
+
