@@ -7,3 +7,7 @@
   yum:
     name: libselinux-python
     state: present
+- name: EPELリポジトリをインストール
+  yum:
+    name: epel-release
+    state: present
