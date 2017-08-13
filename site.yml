@@ -1,0 +1,5 @@
+---
+- name: Playbookチュートリアル # ログに表示するための名前
+  hosts: all # デプロイ対象ホストの指定
+  become: true
+  tasks: # 実タスク
