@@ -108,6 +108,9 @@
 
     * グループ間で変数定義が重複しないようにする
     * ホスト名が同じ場合は同一ホストとして扱われる
+    * -iオプションでディレクトリを指定すれば、そのディレクトリ内のファイルをすべて合わせてくれる
+    * add_hostモジュールでPlaybook内でInventoryに新規ホストを追加できる
+    * group_byモジュールでPlaybook内でグループ分けをすることができる
 
     ```
     [app]
@@ -132,4 +135,73 @@
     * ホスト変数はhost_vars/ホスト名.yml
     * グループ変数はgroup_vars/グループ名.yml
     * グループ名にはallも使える
+
+13. 変数定義
+
+    * ansible-playbook実行時
+        ```-e 'nginx_version=1.10.2 nginx_user=ng'```
+        ```-e '{"nginx_port": 8080}'``` (数値型を扱うならこちら
+        ```-e '@extra-vars.yml'``` (ファイルを使うならこちら
+    * Playbook内での変数定義
+        ```
+        vars:
+            nginx_http_port: 80
+            mysql_port: 3306
+        ```
+    * Playbook内での変数定義 (ファイルから読み込む)
+        ```
+        vars_files:
+            - some_vars.yml
+            - another_vars.yml
+        ```
+
+14. テンプレート その一
+
+    ```
+    admin_user:
+      name: taro
+      uid: 1001
+    ```
+
+    上記変数定義は下記文で次のように取り出せる。
+
+    ```ユーザ名{{ admin_user.name }}のUIDは{{ admin_user.uid }}です```
+    ```ユーザ名taroのUIDは1001です```
+
+15. テンプレート その二
+
+    条件分岐が使える
+
+    ```
+    {% ansible_os_family == 'RedHat' %}
+    このマシンのディストリビューションはRed hat系です
+    {% elif ansible_os_family == 'Debian' %}
+    このマシンのディストリビューションはDebian系です
+    {% else %}
+    このマシンはRed Hat系でもDebian系でもありません
+    {% endif %}
+    ```
+
+16. テンプレート その三
+
+    繰り返しが使える
+
+    * for分の中でifを使うことで、繰り返しの対象を絞ることができる
+    * 特殊変数loopを使って繰り返し数や最後まで行ったかどうかが分かる
+
+    ```
+    admin_users:
+      - name: taro
+        uid: 1001
+      - name: jiro
+        uid: 1002
+      - name: hanako
+        uid: 1003
+    ```
+
+    ```
+    {% for user in admin_users %}
+    ユーザ名{{ user.name }}のUIDは{{ user.uid }}です。
+    {% endfor %}
+    ```
 
