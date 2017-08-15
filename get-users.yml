@@ -10,3 +10,8 @@
     - name: コマンド実行結果から存在するユーザ名のリストを作成
       set_fact:
         username_list: "{{ usernames_result.stdout_lines }}"
+    - name: vagrantユーザが存在する場合にメッセージを表示
+      debug:
+        msg: このマシンにはvagrantユーザが存在します
+      when: "'vagrant' in username_list" # 出力内容の他にタスク実行結果のステータスも使える
+
