@@ -15,4 +15,8 @@
       debug:
         msg: このマシンにはvagrantユーザが存在します
       when: "'vagrant' in username_list" # 出力内容の他にタスク実行結果のステータスも使える
-
+    - name: すべてのユーザが実在するか確認
+      user:
+        name: "{{ item }}"
+        createhome: false
+      with_items: "{{ username_list }}" # loop_varを使ってitem変数から名前を変えることができるし、with_itemsに複数のリストを選択することもできる
