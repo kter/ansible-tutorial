@@ -4,6 +4,7 @@
     - name: /etc/passwdからユーザ名を抜き出し
       command: cut --delimiter=':' --fields=1 /etc/passwd
       register: usernames_result
+      changed_when: false # タスク実行結果ステータス上書き (結果がfalseならchangedとする)
     - name: usernames_result
       debug:
         var: usernames_result
