@@ -20,3 +20,5 @@
     src: nginx.j2.conf
     dest: /etc/nginx/nginx.conf
     validate: nginx -t -c %s
+  notify:
+    - Nginxをリロード
