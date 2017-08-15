@@ -7,3 +7,6 @@
     - name: usernames_result
       debug:
         var: usernames_result
+    - name: コマンド実行結果から存在するユーザ名のリストを作成
+      set_fact:
+        username_list: "{{ usernames_result.stdout_lines }}"
