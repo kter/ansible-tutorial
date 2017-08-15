@@ -205,3 +205,8 @@
     {% endfor %}
     ```
 
+17. roleの雛形作成
+
+    ```
+    ansible-galaxy init --init-path="roles" nginx
+    ```
