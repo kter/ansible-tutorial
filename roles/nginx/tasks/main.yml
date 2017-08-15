@@ -22,3 +22,15 @@
     validate: nginx -t -c %s
   notify:
     - Nginxをリロード
+- name: Nginx用グループを作成
+  group:
+    name: "{{ nginx_group }}"
+    system: true
+- name: Nginx用ユーザを作成
+  user:
+    name: "{{ nginx_user }}"
+    home: /var/lib/nginx
+    shell: /sbin/nologin
+    groups: "{{ nginx_group }}"
+    append: true
+    system: true
