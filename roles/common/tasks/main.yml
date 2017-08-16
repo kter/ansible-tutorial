@@ -27,3 +27,8 @@
         timeout: 600
       become: false
   when: common_make_selinux_permissive | changed and 'state change will take effect next reboot' in common_make_selinux_permissive.msg
+- name: ファイアウォールの有効化
+  service:
+    name: firewalld
+    state: started
+    enabled: true
