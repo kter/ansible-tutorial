@@ -5,3 +5,8 @@
   with_items:
     - libselinux-python
     - policycoreutils-python
+- name: SELinuxの無効化
+  selinux:
+    policy: targeted
+    state: permissive
+  register: common_make_selinux_permissive
