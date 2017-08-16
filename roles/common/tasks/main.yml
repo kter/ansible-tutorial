@@ -1,2 +1,7 @@
 ---
-# tasks file for common
+- name: Python用SELinuxライブラリのインストール
+  yum:
+    name: "{{ item }}"
+  with_items:
+    - libselinux-python
+    - policycoreutils-python
