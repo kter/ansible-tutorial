@@ -24,6 +24,8 @@
       tags:
         - php-fpm
     - name: nginx
+      vars:
+        nginx_default_port: 8080
       tags:
         - nginx
     - name: wordpress
