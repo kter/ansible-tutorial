@@ -14,3 +14,8 @@
     - MariaDB-client
     - MariaDB-devel
     - MySQL-python
+- name: MariaDBサーバ起動と自動起動の有効化
+  service:
+    name: mariadb
+    state: started
+    enabled: true
