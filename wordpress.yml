@@ -21,6 +21,9 @@
       tags:
         - mariadb
     - name: php-fpm
+      vars:
+        php_fpm_additional_packages:
+          - php-mysqlnd
       tags:
         - php-fpm
     - name: nginx

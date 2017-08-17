@@ -1,2 +1,5 @@
 ---
-# handlers file for php-fpm
+- name: PHP-FPMを再起動
+  service:
+    name: php-fpm
+    state: restarted
