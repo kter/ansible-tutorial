@@ -2,11 +2,22 @@
 - name: CentOS 7上にWordPressをセットアップ
   hosts: all
   become: true
+  vars:
+    db_name: wordpress
+    db_user: wordpress
+    db_password: mysQ1InsecureP@ssw0rd
   roles:
     - name: common
       tags:
         - common
     - name: mariadb
+      vars:
+        mariadb_databases:
+          - name: "{{ db_name }}"
+        mariadb_users:
+          - name: "{{ db_user }}"
+            password: "{{ db_password }}"
+            priv: "{{ db_name }}.*:ALL"
       tags:
         - mariadb
     - name: php-fpm
