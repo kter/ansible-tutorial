@@ -1,2 +1,8 @@
 ---
-# tasks file for mariadb
+- name: MariaDB用Yumリポジトリを追加
+  yum_repository:
+    name: mariadb
+    description: MariaDB
+    baseurl: http://yum.mariadb.org/{{ mariadb_version }}/centos7-amd64
+    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    gpgcheck: true
