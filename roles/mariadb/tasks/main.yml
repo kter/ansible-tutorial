@@ -6,3 +6,11 @@
     baseurl: http://yum.mariadb.org/{{ mariadb_version }}/centos7-amd64
     gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
     gpgcheck: true
+- name: MariaDBサーバと関連依存パッケージのインストール
+  yum:
+    name: "{{ item }}"
+  with_items:
+    - MariaDB-server
+    - MariaDB-client
+    - MariaDB-devel
+    - MySQL-python
