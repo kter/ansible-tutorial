@@ -1,5 +1,5 @@
 ---
-- name: Nginxをリロード
+- name: Nginxサービスをリロード
   service:
     name: nginx
     state: reloaded
